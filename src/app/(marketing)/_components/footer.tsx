@@ -13,7 +13,7 @@ export function Footer() {
             <div className="container">
                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
                     <div>
-                        <h3 className="mb-2 font-semibold">Navigation</h3>
+                        <h3 className="mb-2">Navigation</h3>
                         <ul className="space-y-1">
                             {navigation.map((item) => (
                                 <li key={item.href}>
@@ -29,7 +29,7 @@ export function Footer() {
                         </ul>
                     </div>
                     <div>
-                        <h3 className="mb-2 font-semibold">Legal</h3>
+                        <h3 className="mb-2">Legal</h3>
                         <ul className="space-y-1">
                             {legal.map((item) => (
                                 <li key={item.href}>
@@ -44,7 +44,7 @@ export function Footer() {
                         </ul>
                     </div>
                     <div>
-                        <h3 className="mb-2 font-semibold">Follow Us</h3>
+                        <h3 className="mb-2">Follow Us</h3>
                         <ul className="space-y-1">
                             {social.map((item) => (
                                 <li key={item.href}>

@@ -10,6 +10,12 @@ const nextConfig = {
                 port: '',
                 pathname: '/api/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'lienquan.garena.vn',
+                port: '',
+                pathname: '/wp-content/uploads/**',
+            },
         ],
     },
 };

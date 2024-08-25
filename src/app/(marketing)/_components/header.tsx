@@ -32,7 +32,7 @@ export function Header() {
                             <span className="text-xl font-bold text-highlight">Juniper Nexus</span>
                         </Link>
                         <nav className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:inline-flex">
-                            <ul className="flex items-center space-x-6 text-sm font-medium">
+                            <ul className="flex items-center space-x-6 font-medium">
                                 {navigation.map((item) => (
                                     <li key={item.href}>
                                         <Link

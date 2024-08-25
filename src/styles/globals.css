@@ -4,25 +4,25 @@
 
 @layer base {
     :root {
-        --background: 214 17% 8%;
-        --foreground: 218 7% 78%;
-        --muted: 214 12% 15%;
-        --muted-foreground: 214 12% 65%;
-        --popover: 214 17% 5%;
-        --popover-foreground: 218 7% 88%;
-        --card: 214 17% 6%;
-        --card-foreground: 218 7% 83%;
-        --border: 214 7% 13%;
-        --input: 214 7% 16%;
+        --background: 51 47% 4%;
+        --foreground: 51 28% 99%;
+        --muted: 51 14% 9%;
+        --muted-foreground: 51 11% 72%;
+        --popover: 54 50% 3.92%;
+        --popover-foreground: 51 28% 99%;
+        --card: 51 26.67% 6.07%;
+        --card-foreground: 51 28% 99%;
+        --border: 51 10% 10%;
+        --input: 51 10% 10%;
         --primary: 220 6.98% 83.14%;
         --primary-foreground: 216 16.13% 6.08%;
-        --secondary: 216 19.38% 16.05%;
-        --secondary-foreground: 212 21.64% 90.54%;
-        --accent: 214 17% 23%;
-        --accent-foreground: 214 17% 83%;
-        --destructive: 0 100% 28.64%;
-        --destructive-foreground: 0 0% 100%;
-        --ring: 5 85% 54%;
+        --secondary: 51 6% 18%;
+        --secondary-foreground: 51 6% 78%;
+        --accent: 51 6% 18%;
+        --accent-foreground: 51 6% 78%;
+        --destructive: 6 100% 65%;
+        --destructive-foreground: 0 54.29% 6.86%;
+        --ring: 40.71 100% 50%;
         --highlight: 5 85% 54%;
         --radius: 0.5rem;
     }
@@ -46,7 +46,7 @@
     }
 
     ::-webkit-scrollbar-thumb {
-        @apply rounded-full bg-foreground/25;
+        @apply rounded-full bg-foreground;
     }
 
     h1,
