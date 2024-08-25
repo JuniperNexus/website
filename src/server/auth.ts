@@ -31,9 +31,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 role: session.user.role as $Enums.Role,
             },
         }),
-        async redirect({ url, baseUrl }) {
-            if (url === baseUrl) return '/dashboard';
-            return url;
+        async signIn({ user }) {
+            if (!user) return false;
+            const profile = await prisma.profile.findUnique({
+                where: { user_id: user.id },
+            });
+            if (!profile) {
+                return '/onboarding';
+            }
+            return true;
         },
     },
 });
