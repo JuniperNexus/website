@@ -9,19 +9,19 @@ datasource db {
 }
 
 model User {
-  id            String        @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String        @unique
+  email         String    @unique
   emailVerified DateTime? @map("email_verified")
   image         String?
-  role          Role          @default(MEMBER)
-  created_at    DateTime      @default(now())
-  updated_at    DateTime      @updatedAt
+  role          Role      @default(MEMBER)
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
   accounts      Account[]
-  Coin          Coin[]
-  Event         Event[]
+  coin          Coin[]
+  event         Event[]
   sessions      Session[]
-  UserProfile   UserProfile[]
+  profile       Profile[]
 
   @@map("users")
 }
@@ -86,7 +86,7 @@ model Event {
   @@map("events")
 }
 
-model UserProfile {
+model Profile {
   id            Int            @id @default(autoincrement())
   user_id       String
   first_name    String
@@ -98,7 +98,7 @@ model UserProfile {
   interested_in InterestedIn[]
   users         User           @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
-  @@map("user_profiles")
+  @@map("profiles")
 }
 
 enum InterestedIn {
