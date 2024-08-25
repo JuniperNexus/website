@@ -1,11 +1,12 @@
 'use client';
 
+import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useScroll } from '@/hooks/use-scroll';
 import { cn } from '@/lib/utils';
-import { Menu, Zap } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { navigation } from '../_constants/navigation';
@@ -24,13 +25,13 @@ export function Header() {
             )}
         >
             <Container reverse>
-                <div className="container flex h-14 items-center justify-between">
+                <div className="container flex h-20 items-center justify-between">
                     <div className="flex space-x-6">
                         <Link className="flex items-center space-x-2 text-primary" href="/">
-                            <Zap className="size-6" />
-                            <span className="text-xl font-bold">Axiom</span>
+                            <Logo className="size-8" />
+                            <span className="text-xl font-bold text-highlight">Juniper Nexus</span>
                         </Link>
-                        <nav className="hidden md:inline-flex">
+                        <nav className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:inline-flex">
                             <ul className="flex items-center space-x-6 text-sm font-medium">
                                 {navigation.map((item) => (
                                     <li key={item.href}>
@@ -47,15 +48,15 @@ export function Header() {
                         </nav>
                     </div>
                     {session ? (
-                        <UserButton user={session.user} className="hidden md:inline-flex" />
+                        <UserButton user={session.user} className="hidden lg:inline-flex" />
                     ) : (
-                        <SignIn className="hidden md:inline-flex" />
+                        <SignIn className="hidden lg:inline-flex" />
                     )}
                     <Sheet>
                         <SheetTrigger asChild>
                             <Button
                                 variant="ghost"
-                                className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+                                className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden"
                             >
                                 <Menu className="size-6" />
                                 <span className="sr-only">Toggle Menu</span>
@@ -63,8 +64,10 @@ export function Header() {
                         </SheetTrigger>
                         <SheetContent side="right">
                             <Link className="mr-6 flex items-center space-x-2" href="/">
-                                <Zap className="size-6" />
-                                <span className="font-bold">Axiom</span>
+                                <Logo className="size-8" />
+                                <span className="text-xl font-bold text-highlight">
+                                    Juniper Nexus
+                                </span>
                             </Link>
                             <ul className="my-6 flex flex-col space-y-4 border-t py-6">
                                 {navigation.map((item) => (

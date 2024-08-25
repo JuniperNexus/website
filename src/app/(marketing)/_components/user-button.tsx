@@ -20,7 +20,7 @@ export function UserButton({ user, className }: { user: User | undefined; classN
         <DropdownMenu>
             <DropdownMenuTrigger className={className} asChild>
                 <Button variant="ghost">
-                    <Avatar className="mr-2 size-6">
+                    <Avatar className="mr-2 size-8">
                         <AvatarImage
                             src={
                                 user?.image ||
