@@ -10,7 +10,8 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
-import { GithubIcon, Zap } from 'lucide-react';
+import { DiscordIcon } from '@/components/ui/icons/discord';
+import { Zap } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import Balancer from 'react-wrap-balancer';
 
@@ -31,9 +32,9 @@ export function SignIn({ className }: { className?: string }) {
                         </Balancer>
                     </DialogDescription>
                     <DialogFooter>
-                        <Button onClick={() => signIn('github')}>
-                            <GithubIcon className="mr-2 size-5" />
-                            Sign in with GitHub
+                        <Button onClick={() => signIn('discord', { redirectTo: '/dashboard' })}>
+                            <DiscordIcon className="mr-2 size-5" />
+                            Sign in with Discord
                         </Button>
                     </DialogFooter>
                 </DialogHeader>

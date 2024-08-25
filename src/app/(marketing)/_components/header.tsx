@@ -6,11 +6,14 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useScroll } from '@/hooks/use-scroll';
 import { cn } from '@/lib/utils';
 import { Menu, Zap } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { navigation } from '../_constants/navigation';
 import { SignIn } from './sign-in';
+import { UserButton } from './user-button';
 
 export function Header() {
+    const { data: session } = useSession();
     const scrolled = useScroll(50);
 
     return (
@@ -43,7 +46,11 @@ export function Header() {
                             </ul>
                         </nav>
                     </div>
-                    <SignIn className="hidden md:inline-flex" />
+                    {session ? (
+                        <UserButton user={session.user} className="hidden md:inline-flex" />
+                    ) : (
+                        <SignIn className="hidden md:inline-flex" />
+                    )}
                     <Sheet>
                         <SheetTrigger asChild>
                             <Button
@@ -72,7 +79,11 @@ export function Header() {
                                     </li>
                                 ))}
                             </ul>
-                            <SignIn className="w-full" />
+                            {session ? (
+                                <UserButton user={session.user} className="w-full" />
+                            ) : (
+                                <SignIn className="w-full" />
+                            )}
                         </SheetContent>
                     </Sheet>
                 </div>

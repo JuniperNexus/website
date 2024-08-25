@@ -1,3 +1,4 @@
+import { SessionProvider } from '@/components/session-provider';
 import { cn } from '@/lib/utils';
 import { fontHeading, fontMono, fontSans } from '@/styles/fonts';
 import '@/styles/globals.css';
@@ -11,11 +12,13 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
     return (
-        <html lang="en" suppressHydrationWarning>
-            <body className={cn(fontSans.variable, fontHeading.variable, fontMono.variable)}>
-                <Provider>{children}</Provider>
-            </body>
-        </html>
+        <SessionProvider>
+            <html lang="th" suppressHydrationWarning>
+                <body className={cn(fontSans.variable, fontHeading.variable, fontMono.variable)}>
+                    <Provider>{children}</Provider>
+                </body>
+            </html>
+        </SessionProvider>
     );
 };
 
