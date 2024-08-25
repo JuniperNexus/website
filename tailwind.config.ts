@@ -60,7 +60,7 @@ const config = {
                     foreground: 'hsl(var(--card-foreground))',
                 },
                 highlight: {
-                    DEFAULT: 'var(--highlight)',
+                    DEFAULT: 'hsl(var(--highlight))',
                 },
             },
             borderRadius: {

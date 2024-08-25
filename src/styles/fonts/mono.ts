@@ -1,6 +1,7 @@
-import { Source_Code_Pro as FontMono } from 'next/font/google';
+import { Kodchasan as FontMono } from 'next/font/google';
 
 export const fontMono = FontMono({
     subsets: ['latin'],
     variable: '--font-mono',
+    weight: ['200', '300', '400', '500', '600', '700'],
 });
