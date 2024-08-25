@@ -18,9 +18,9 @@ const buttonVariants = cva(
                 transparent: 'bg-transparent hover:bg-transparent',
             },
             size: {
-                default: 'h-9 px-4 text-xs',
-                sm: 'h-8 px-3 text-xs',
-                md: 'h-10 px-5 py-2 text-sm',
+                xs: 'h-8 px-3 text-xs',
+                sm: 'h-9 px-4 text-xs',
+                default: 'h-10 px-5 py-2 text-sm',
                 lg: 'h-11 px-9 text-base',
                 icon: 'size-10',
                 iconx: 'size-9',
