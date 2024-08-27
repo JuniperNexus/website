@@ -16,7 +16,23 @@ const nextConfig = {
                 port: '',
                 pathname: '/wp-content/uploads/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'cdn.discordapp.com',
+                port: '',
+                pathname: '/widget-avatars/**',
+            },
         ],
+    },
+    redirects: async () => {
+        return [
+            {
+                source: '/discord',
+                destination: 'https://discord.gg/juniper-nexus',
+                basePath: false,
+                permanent: false,
+            },
+        ];
     },
 };
 
