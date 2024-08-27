@@ -32,7 +32,7 @@ export function SignIn({ className }: { className?: string }) {
                         </Balancer>
                     </DialogDescription>
                     <DialogFooter>
-                        <Button onClick={() => signIn('discord', { redirectTo: '/dashboard' })}>
+                        <Button onClick={() => signIn('discord')}>
                             <DiscordIcon className="mr-2 size-5" />
                             ลงชื่อเข้าใช้ด้วย Discord
                         </Button>

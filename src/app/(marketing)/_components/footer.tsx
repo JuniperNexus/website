@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { legal } from '../_constants/legal';
-import { navigation } from '../_constants/navigation';
+// import { navigation } from '../_constants/navigation';
 import { social } from '../_constants/social';
 
 export function Footer() {
@@ -11,8 +11,9 @@ export function Footer() {
     return (
         <footer className="border-t bg-background py-8 text-foreground">
             <div className="container">
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
-                    <div>
+                {/* <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3"> */}
+                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+                    {/* <div>
                         <h3 className="mb-2">Navigation</h3>
                         <ul className="space-y-1">
                             {navigation.map((item) => (
@@ -27,7 +28,7 @@ export function Footer() {
                                 </li>
                             ))}
                         </ul>
-                    </div>
+                    </div> */}
                     <div>
                         <h3 className="mb-2">Legal</h3>
                         <ul className="space-y-1">

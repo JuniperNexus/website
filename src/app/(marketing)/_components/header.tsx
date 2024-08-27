@@ -1,15 +1,15 @@
 'use client';
 
 import { Logo } from '@/components/logo';
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+// import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useScroll } from '@/hooks/use-scroll';
 import { cn } from '@/lib/utils';
-import { Menu } from 'lucide-react';
+// import { Menu } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { navigation } from '../_constants/navigation';
+// import { navigation } from '../_constants/navigation';
 import { SignIn } from './sign-in';
 import { UserButton } from './user-button';
 
@@ -31,7 +31,7 @@ export function Header() {
                             <Logo className="size-8" />
                             <span className="text-xl font-bold text-highlight">Juniper Nexus</span>
                         </Link>
-                        <nav className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:inline-flex">
+                        {/* <nav className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:inline-flex">
                             <ul className="flex items-center space-x-6 font-medium">
                                 {navigation.map((item) => (
                                     <li key={item.href}>
@@ -45,14 +45,15 @@ export function Header() {
                                     </li>
                                 ))}
                             </ul>
-                        </nav>
+                        </nav> */}
                     </div>
-                    {session ? (
+                    {/* {session ? (
                         <UserButton user={session.user} className="hidden lg:inline-flex" />
                     ) : (
                         <SignIn className="hidden lg:inline-flex" />
-                    )}
-                    <Sheet>
+                    )} */}
+                    {session ? <UserButton user={session.user} /> : <SignIn />}
+                    {/* <Sheet>
                         <SheetTrigger asChild>
                             <Button
                                 variant="ghost"
@@ -88,7 +89,7 @@ export function Header() {
                                 <SignIn className="w-full" />
                             )}
                         </SheetContent>
-                    </Sheet>
+                    </Sheet> */}
                 </div>
             </Container>
         </header>
