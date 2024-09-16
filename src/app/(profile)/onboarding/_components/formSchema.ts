@@ -7,7 +7,7 @@ export const formSchema = z.object({
     phone_number: z.string().min(10, 'Phone number must be at least 10 characters').max(10),
     address: z.string().min(5, 'Address must be at least 5 characters'),
     in_game_name: z.string().min(3, 'In-game name must be at least 3 characters'),
-    lane: z.nativeEnum(Lane),
+    lane: z.array(z.nativeEnum(Lane)).min(1, 'Select at least one lane'),
     interested_in: z.array(z.nativeEnum(InterestedIn)).min(1, 'Select at least one interest'),
 });
 

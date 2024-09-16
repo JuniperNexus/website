@@ -2,39 +2,26 @@
 
 import { navigate } from '@/app/action/navigate';
 import { Button } from '@/components/ui/button';
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
-import {
-    FormField as BaseFormField,
-    Form,
-    FormControl,
-    FormDescription,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/components/ui/form';
+import { Form } from '@/components/ui/form';
 import { toast } from '@/hooks/use-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { InterestedIn } from '@prisma/client';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
 import { type Session } from 'next-auth';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { submit } from '../_action/submit';
-import { FormField } from './FormField';
 import { formSchema, type FormValues } from './formSchema';
 import { steps } from './steps';
+import { ContactInfoStep } from './steps/ContactInfoStep';
+import { GameInfoStep } from './steps/GameInfoStep';
+import { PersonalInfoStep } from './steps/PersonalInfoStep';
+import { PreferencesStep } from './steps/PreferencesStep';
+import { SummaryStep } from './steps/SummaryStep';
+import { ThankYouStep } from './steps/ThankYouStep';
 
 export function FormCard({ session }: { session: Session | null }) {
-    const [step, setStep] = useState(0);
+    const [step, setStep] = useState(1);
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -48,11 +35,9 @@ export function FormCard({ session }: { session: Session | null }) {
         },
     });
 
-    const isLastStep = step === steps.length - 1;
-
-    const prevStep = () => setStep((prev) => prev - 1);
-    const nextStep = async () => {
-        const result = await form.trigger(steps[step]?.feilds);
+    const handlePrev = () => setStep((prev) => prev - 1);
+    const handleNext = async () => {
+        const result = await form.trigger(steps.find((s) => s.step === step)?.feilds ?? []);
         if (!result) return;
         setStep((prev) => prev + 1);
     };
@@ -77,7 +62,6 @@ export function FormCard({ session }: { session: Session | null }) {
             const response = await submit({
                 ...values,
                 user_id: session.user.id as string,
-                lane: [values.lane],
             });
 
             if (!response.success) {
@@ -90,11 +74,10 @@ export function FormCard({ session }: { session: Session | null }) {
                 return;
             }
 
-            toast({
-                title: 'Success',
-                description: 'Profile created successfully',
-            });
-            navigate('/');
+            setStep(6);
+            setTimeout(() => {
+                navigate('/');
+            }, 3000);
         } catch (error) {
             console.error(error);
             toast({
@@ -106,114 +89,57 @@ export function FormCard({ session }: { session: Session | null }) {
     };
 
     return (
-        <Card className="w-[550px]">
-            <CardHeader>
-                <CardTitle>{steps[step]?.title}</CardTitle>
-                <CardDescription>{steps[step]?.description}</CardDescription>
-            </CardHeader>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(() => onSubmit(form.getValues()))}>
-                    <CardContent className="grid gap-4">
-                        {steps[step]?.feilds.map((field) => {
-                            if (field === 'interested_in') {
-                                return (
-                                    <BaseFormField
-                                        key={field}
-                                        control={form.control}
-                                        name="interested_in"
-                                        render={() => (
-                                            <FormItem>
-                                                <div className="mb-4">
-                                                    <FormLabel className="text-base">
-                                                        Interests
-                                                    </FormLabel>
-                                                    <FormDescription>
-                                                        Select all that apply to you
-                                                    </FormDescription>
-                                                </div>
-                                                {Object.values(InterestedIn).map((item) => (
-                                                    <BaseFormField
-                                                        key={item}
-                                                        control={form.control}
-                                                        name="interested_in"
-                                                        render={({ field }) => (
-                                                            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                                                                <FormControl>
-                                                                    <Checkbox
-                                                                        checked={field.value?.includes(
-                                                                            item,
-                                                                        )}
-                                                                        onCheckedChange={(
-                                                                            checked,
-                                                                        ) => {
-                                                                            return checked
-                                                                                ? field.onChange([
-                                                                                      ...field.value,
-                                                                                      item,
-                                                                                  ])
-                                                                                : field.onChange(
-                                                                                      field.value?.filter(
-                                                                                          (value) =>
-                                                                                              value !==
-                                                                                              item,
-                                                                                      ),
-                                                                                  );
-                                                                        }}
-                                                                    />
-                                                                </FormControl>
-                                                                <FormLabel className="font-normal">
-                                                                    {item
-                                                                        .replace('_', ' ')
-                                                                        .toLowerCase()}
-                                                                </FormLabel>
-                                                            </FormItem>
-                                                        )}
-                                                    />
-                                                ))}
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                );
-                            }
+        <div className="w-full max-w-4xl overflow-hidden rounded-2xl border bg-card shadow-xl">
+            <div className="p-8">
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                        {step === 1 && <PersonalInfoStep form={form} />}
+                        {step === 2 && <ContactInfoStep form={form} />}
+                        {step === 3 && <GameInfoStep form={form} />}
+                        {step === 4 && <PreferencesStep form={form} />}
+                        {step === 5 && <SummaryStep form={form} />}
+                        {step === 6 && <ThankYouStep />}
 
-                            return (
-                                <FormField
-                                    key={field}
-                                    name={field}
-                                    label={field.replace('_', ' ').toUpperCase()}
-                                    control={form.control}
-                                    type={
-                                        field === 'lane'
-                                            ? 'radio'
-                                            : field === 'address'
-                                              ? 'textarea'
-                                              : 'text'
-                                    }
-                                />
-                            );
-                        })}
-                    </CardContent>
-                    <CardFooter className="flex justify-between">
-                        <Button
-                            type="button"
-                            variant="outline"
-                            onClick={() => prevStep()}
-                            disabled={step === 0}
-                        >
-                            <ArrowLeft className="mr-2 size-4" /> Previous
-                        </Button>
-                        {isLastStep ? (
-                            <Button type="submit">Complete</Button>
-                        ) : (
-                            <Button type="button" onClick={() => nextStep()}>
-                                Next
-                                <ArrowRight className="ml-2 size-4" />
-                            </Button>
-                        )}
-                    </CardFooter>
-                </form>
-            </Form>
-        </Card>
+                        <div className="mt-8 flex justify-between">
+                            {step > 1 && step < 6 && (
+                                <Button
+                                    type="button"
+                                    onClick={() => handlePrev()}
+                                    variant="outline"
+                                >
+                                    <ArrowLeft className="mr-2 size-4" /> Previous
+                                </Button>
+                            )}
+                            {step < 5 && (
+                                <Button
+                                    type="button"
+                                    onClick={() => handleNext()}
+                                    className="ml-auto"
+                                >
+                                    Next <ArrowRight className="ml-2 size-4" />
+                                </Button>
+                            )}
+                            {step === 5 && (
+                                <Button type="submit" className="ml-auto">
+                                    Submit <CheckCircle className="ml-2 size-4" />
+                                </Button>
+                            )}
+                        </div>
+                    </form>
+                </Form>
+
+                <div className="mt-8">
+                    <div className="flex items-center justify-between space-x-2">
+                        {[1, 2, 3, 4, 5].map((i) => (
+                            <div
+                                key={i}
+                                className={`h-2 w-1/5 rounded-full ${i <= step ? 'bg-primary' : 'bg-muted'}`}
+                            />
+                        ))}
+                    </div>
+                    <p className="mt-2 text-center text-muted-foreground">Step {step} of 5</p>
+                </div>
+            </div>
+        </div>
     );
 }
