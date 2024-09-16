@@ -20,7 +20,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             clientId: env.AUTH_DISCORD_ID,
             clientSecret: env.AUTH_DISCORD_SECRET,
             authorization:
-                'https://discord.com/api/oauth2/authorize?scope=identify+guilds+guilds.members.read',
+                'https://discord.com/api/oauth2/authorize?scope=identify+guilds+email+guilds.members.read',
         }),
     ],
     callbacks: {
@@ -31,15 +31,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 role: session.user.role as $Enums.Role,
             },
         }),
-        async signIn({ user }) {
-            if (!user) return false;
-            const profile = await prisma.profile.findUnique({
-                where: { user_id: user.id },
-            });
-            if (!profile) {
-                return '/onboarding';
-            }
-            return true;
-        },
+    },
+    pages: {
+        newUser: '/onboarding',
     },
 });

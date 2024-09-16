@@ -1,4 +1,5 @@
 import { SessionProvider } from '@/components/session-provider';
+import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { fontHeading, fontMono, fontSans } from '@/styles/fonts';
 import '@/styles/globals.css';
@@ -23,6 +24,7 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
                     )}
                 >
                     <Provider>{children}</Provider>
+                    <Toaster />
                 </body>
             </html>
         </SessionProvider>
