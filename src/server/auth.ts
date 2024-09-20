@@ -6,7 +6,7 @@ import NextAuth, { type DefaultSession } from 'next-auth';
 import DiscordProvider from 'next-auth/providers/discord';
 
 declare module 'next-auth' {
-    interface Session {
+    export interface Session {
         user: {
             role: $Enums.Role;
         } & DefaultSession['user'];

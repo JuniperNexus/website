@@ -15,14 +15,7 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
     return (
         <SessionProvider>
             <html lang="th" suppressHydrationWarning>
-                <body
-                    className={cn(
-                        'dark',
-                        fontSans.variable,
-                        fontHeading.variable,
-                        fontMono.variable,
-                    )}
-                >
+                <body className={cn(fontSans.variable, fontHeading.variable, fontMono.variable)}>
                     <Provider>{children}</Provider>
                     <Toaster />
                 </body>

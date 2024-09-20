@@ -1,7 +1,6 @@
-export default function Page() {
-    return (
-        <div>
-            <h1>Dashboard</h1>
-        </div>
-    );
+import { auth } from '@/server/auth';
+
+export default async function Page() {
+    const session = await auth();
+    return <pre>{JSON.stringify(session, null, 2)}</pre>;
 }
